@@ -24,7 +24,7 @@ steps:
 - task: AzureRmWebAppDeployment@3
   inputs:
     azureSubscription: 'BehbudShikhaliyev'
-    WebAppName: '<bsh>'
+    WebAppName: 'bsh'
     Package: $(System.ArtifactsDirectory)/**/*.zip
     
 - task: AzureRmWebAppDeployment@3
