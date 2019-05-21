@@ -20,3 +20,76 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+    
+- task: AzureRmWebAppDeployment@3
+  inputs:
+    azureSubscription: 'BehbudSh'
+    WebAppName: '<bsh>'
+    Package: $(System.ArtifactsDirectory)/**/*.zip
+    
+- task: AzureRmWebAppDeployment@3
+  inputs:
+    azureSubscription: 'BehbudSh'
+    WebAppName: 'bsh'
+    Package: '$(System.DefaultWorkingDirectory)/**/*.war'
+ 
+- task: AzureRmWebAppDeployment@3
+  inputs:
+    azureSubscription: 'BehbudSh'
+    WebAppName: 'bsh'
+    Package: '$(System.DefaultWorkingDirectory)'
+    GenerateWebConfig: true
+    WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
+
+- task: AzureRmWebAppDeployment@3
+  inputs:
+    VirtualApplication: 'bsh'
+    
+- task: AzureRmWebAppDeployment@3
+  inputs:
+    azureSubscription: 'BehbudSh'
+    WebAppName: 'bsh'
+    DeployToSlotFlag: true
+    ResourceGroupName: 'DevAzure'
+    SlotName: staging
+
+- task: AzureAppServiceManage@0
+  inputs:
+    azureSubscription: 'BehbudSh'
+    WebAppName: 'bsh'
+    ResourceGroupName: 'DevAzure'
+    SourceSlot: staging
+    
+jobs:
+
+- job: buildandtest
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+
+  # add steps here to build the app
+
+  # the following will publish an artifact called drop
+  - task: PublishBuildArtifacts@1
+
+  - task: AzureRmWebAppDeployment@3
+    inputs:
+      azureSubscription: 'BehbudSh'
+      WebAppName: 'bsh'
+
+- job: prod
+  pool:
+    vmImage: 'ubuntu-16.04'
+  dependsOn: buildandtest
+  condition: succeeded()
+  steps:
+
+  # step to download the artifacts from the previous job
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      artifactName: drop
+
+  - task: AzureRmWebAppDeployment@3
+    inputs:
+      azureSubscription: 'BehbudSh'
+      WebAppName: 'bsh'
