@@ -61,7 +61,6 @@ steps:
     SourceSlot: staging
     
 jobs:
-
 - job: buildandtest
   pool:
     vmImage: 'ubuntu-16.04'
