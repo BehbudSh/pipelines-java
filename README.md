@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/sariyevrustam/testProject/_apis/build/status/testProject-Maven-CI?branchName=master)](https://dev.azure.com/sariyevrustam/testProject/_build/latest?definitionId=11&branchName=master)
+[![Build Status](https://dev.azure.com/sariyevrustam/testProject/_apis/build/status/BehbudSh.pipelines-java?branchName=master)](https://dev.azure.com/sariyevrustam/testProject/_build/latest?definitionId=12&branchName=master)
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
