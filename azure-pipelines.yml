@@ -23,19 +23,19 @@ steps:
     
 - task: AzureRmWebAppDeployment@3
   inputs:
-    azureSubscription: 'BehbudSh'
+    azureSubscription: 'BehbudShikhaliyev'
     WebAppName: '<bsh>'
     Package: $(System.ArtifactsDirectory)/**/*.zip
     
 - task: AzureRmWebAppDeployment@3
   inputs:
-    azureSubscription: 'BehbudSh'
+    azureSubscription: 'BehbudShikhaliyev'
     WebAppName: 'bsh'
     Package: '$(System.DefaultWorkingDirectory)/**/*.war'
  
 - task: AzureRmWebAppDeployment@3
   inputs:
-    azureSubscription: 'BehbudSh'
+    azureSubscription: 'BehbudShikhaliyev'
     WebAppName: 'bsh'
     Package: '$(System.DefaultWorkingDirectory)'
     GenerateWebConfig: true
@@ -47,7 +47,7 @@ steps:
     
 - task: AzureRmWebAppDeployment@3
   inputs:
-    azureSubscription: 'BehbudSh'
+    azureSubscription: 'BehbudShikhaliyev'
     WebAppName: 'bsh'
     DeployToSlotFlag: true
     ResourceGroupName: 'DevAzure'
@@ -55,7 +55,7 @@ steps:
 
 - task: AzureAppServiceManage@0
   inputs:
-    azureSubscription: 'BehbudSh'
+    azureSubscription: 'BehbudShikhaliyev'
     WebAppName: 'bsh'
     ResourceGroupName: 'DevAzure'
     SourceSlot: staging
