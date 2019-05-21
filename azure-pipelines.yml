@@ -25,34 +25,8 @@ steps:
   inputs:
     azureSubscription: 'BehbudShikhaliyev'
     WebAppName: 'bsh'
-    Package: '$(System.ArtifactsDirectory)/**/*.war'
+    Package: $(System.ArtifactsDirectory)/**/*.zip
     
-- task: AzureRmWebAppDeployment@3
-  inputs:
-    azureSubscription: 'BehbudShikhaliyev'
-    WebAppName: 'bsh'
-    Package: '$(System.DefaultWorkingDirectory)/**/*.war'
- 
-- task: AzureRmWebAppDeployment@3
-  inputs:
-    azureSubscription: 'BehbudShikhaliyev'
-    WebAppName: 'bsh'
-    Package: '$(System.DefaultWorkingDirectory)'
-    GenerateWebConfig: true
-    WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
-
-- task: AzureRmWebAppDeployment@3
-  inputs:
-    VirtualApplication: 'bsh'
-    
-- task: AzureRmWebAppDeployment@3
-  inputs:
-    azureSubscription: 'BehbudShikhaliyev'
-    WebAppName: 'bsh'
-    DeployToSlotFlag: true
-    ResourceGroupName: 'DevAzure'
-    SlotName: staging
-
 - task: AzureAppServiceManage@0
   inputs:
     azureSubscription: 'BehbudShikhaliyev'
